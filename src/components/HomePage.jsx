@@ -42,7 +42,9 @@ const HomePage = () => {
                     <div className="biodata-samples">
                         <div className="sample-card sample-1">
                             <div className="sample-header">
-                                <div className="sample-photo"></div>
+                                <div className="sample-photo">
+                                    <img src="/assets/sdrr.png" alt="Sample 1" />
+                                </div>
                                 <h3>Priya Sharma</h3>
                             </div>
                             <div className="sample-content">
@@ -54,7 +56,9 @@ const HomePage = () => {
 
                         <div className="sample-card sample-2">
                             <div className="sample-header">
-                                <div className="sample-photo"></div>
+                                <div className="sample-photo">
+                                    <img src="/assets/ssssss.png" alt="Sample 2" />
+                                </div>
                                 <h3>Rahul Patel</h3>
                             </div>
                             <div className="sample-content">
@@ -66,7 +70,9 @@ const HomePage = () => {
 
                         <div className="sample-card sample-3">
                             <div className="sample-header">
-                                <div className="sample-photo"></div>
+                                <div className="sample-photo">
+                                    <img src="/assets/unnamed.png" alt="Sample 3" />
+                                </div>
                                 <h3>Anjali Singh</h3>
                             </div>
                             <div className="sample-content">
@@ -84,6 +90,28 @@ const HomePage = () => {
                 <h2>Popular Marriage Biodata Designs</h2>
                 <p>Discover InstantBiodata's most downloaded marriage biodata templates! Browse popular layouts, stylish designs, and creative content ideas to inspire your own biodata.</p>
                 <p>See what works best and make yours stand out instantly!</p>
+
+                {/* Sample Gallery */}
+                <div className="sample-gallery">
+                    <div className="gallery-item">
+                        <img src="/assets/sssssssssssss.png" alt="Traditional Design" />
+                        <div className="gallery-overlay">
+                            <span>Traditional Design</span>
+                        </div>
+                    </div>
+                    <div className="gallery-item">
+                        <img src="/assets/sssssssssssssssdfg.png" alt="Modern Design" />
+                        <div className="gallery-overlay">
+                            <span>Modern Design</span>
+                        </div>
+                    </div>
+                    <div className="gallery-item">
+                        <img src="/assets/wwww.png" alt="Elegant Design" />
+                        <div className="gallery-overlay">
+                            <span>Elegant Design</span>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="cta-section">
                     <p>Select your favorite biodata design to get started</p>

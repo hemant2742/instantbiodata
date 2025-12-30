@@ -4,7 +4,6 @@ import Header from './components/Header';
 import HomePage from './components/HomePage';
 import TemplatesPage from './components/TemplatesPage';
 import BiodataForm from './components/BiodataForm';
-import BiodataPreview from './components/BiodataPreview';
 
 function App() {
     const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -40,19 +39,6 @@ function App() {
                                     onSubmit={handleFormSubmit}
                                     selectedTemplate={selectedTemplate}
                                 />
-                            }
-                        />
-                        <Route
-                            path="/preview"
-                            element={
-                                biodataData ? (
-                                    <BiodataPreview
-                                        data={biodataData}
-                                        template={selectedTemplate}
-                                    />
-                                ) : (
-                                    <Navigate to="/form" replace />
-                                )
                             }
                         />
                         <Route path="*" element={<Navigate to="/" replace />} />

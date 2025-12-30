@@ -393,7 +393,8 @@ body {
     }
 }
 
-/ * Additional animations and effects */ .form-container,
+/* Additional animations and effects */
+.form-container,
 .preview-container {
     animation: fadeInUp 0.6s ease-out;
 }
@@ -1082,7 +1083,8 @@ e-specific preview styles */
     background-clip: text;
 }
 
-/ * Traditional Biodata Styling */ .traditional-biodata {
+/* Traditional Biodata Styling */
+.traditional-biodata {
     background: #ffffff;
     border: 8px solid transparent;
     background-image:
@@ -1486,7 +1488,6 @@ a.nav-item:hover {
 /* Form styling improvements */
 .form-container {
     max-width: 900px;
-    margin: 0 auto;
 }
 
 .form-section {
@@ -1501,8 +1502,7 @@ a.nav-item:hover {
     background: linear-gradient(135deg, var(--template-primary, #d63384) 0%, var(--template-accent, #dc3545) 100%);
 }
 
-/* Rea
-listic Template Preview Styles */
+/* Realistic Template Preview Styles */
 .template-preview {
     height: 400px;
     padding: 15px;
@@ -1759,5 +1759,1287 @@ listic Template Preview Styles */
     .preview-section-header {
         font-size: 0.65rem;
         padding: 3px 6px;
+    }
+}
+
+/*
+ Form with Preview Layout */
+.form-with-preview {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: fit-content;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.preview-sidebar {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-sidebar .preview-header {
+    padding: 20px 20px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.preview-sidebar .preview-header h3 {
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.preview-sidebar .preview-header small {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.preview-content {
+    padding: 20px;
+}
+
+.preview-content .preview-container {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+.preview-content .traditional-biodata {
+    transform: scale(0.6);
+    transform-origin: top left;
+    width: 166.67%;
+    /* Compensate for scale */
+    margin-bottom: -40%;
+}
+
+.preview-content .biodata-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+.preview-content .traditional-title {
+    font-size: 1.8rem;
+}
+
+.preview-content .traditional-name {
+    font-size: 1.4rem;
+}
+
+.preview-content .traditional-photo {
+    width: 80px;
+    height: 100px;
+    margin: 15px auto;
+}
+
+.preview-content .traditional-section {
+    margin-bottom: 15px;
+}
+
+.preview-content .traditional-section-title {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin-bottom: 10px;
+}
+
+.preview-content .info-row {
+    padding: 4px 15px;
+    font-size: 0.8rem;
+}
+
+.preview-content .info-row .info-label {
+    min-width: 120px;
+    font-size: 0.8rem;
+}
+
+.preview-content .decorative-border-top,
+.preview-content .decorative-border-bottom {
+    height: 25px;
+}
+
+.preview-content .decorative-border-top::before,
+.preview-content .decorative-border-top::after,
+.preview-content .decorative-border-bottom::before,
+.preview-content .decorative-border-bottom::after {
+    font-size: 1.2rem;
+}
+
+/* Mobile responsiveness for form with preview */
+@media (max-width: 1200px) {
+    .form-with-preview {
+        grid-template-columns: 58% 42%;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .form-with-preview {
+        grid-template-columns: 55% 45%;
+        gap: 20px;
+    }
+
+    .preview-sidebar {
+        position: relative;
+        top: auto;
+        max-height: 500px;
+    }
+
+    .preview-content .traditional-biodata {
+        transform: scale(0.8);
+        width: 125%;
+        margin-bottom: -20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-with-preview {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .preview-sidebar {
+        max-height: 400px;
+        order: -1;
+        /* Show preview above form on mobile */
+    }
+
+    .preview-content .traditional-biodata {
+        transform: scale(0.7);
+        width: 142.86%;
+        margin-bottom: -30%;
+    }
+}
+
+/* Auto-save indicator */
+.auto-save-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(25, 135, 84, 0.9);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.auto-save-indicator.show {
+    opacity: 1;
+}
+
+.auto-save-indicator.error {
+    background: rgba(220, 53, 69, 0.9);
+}
+
+/* Enhanced form styling for better UX */
+.form-section {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(214, 51, 132, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-section:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Improved scrollbar for preview sidebar */
+.preview-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.preview-sidebar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.preview-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(214, 51, 132, 0.3);
+    border-radius: 3px;
+}
+
+.preview-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(214, 51, 132, 0.5);
+}
+
+/* Form acti
+ons styling */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-actions .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .form-actions {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Image
+ Upload Styles */
+.image-upload-section {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.image-upload-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.image-upload-placeholder {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border: 2px dashed #d63384;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(214, 51, 132, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.image-upload-placeholder:hover {
+    border-color: #c02a6b;
+    background: rgba(214, 51, 132, 0.1);
+    transform: translateY(-2px);
+}
+
+.image-input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.image-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #d63384;
+}
+
+.upload-icon {
+    font-size: 3rem;
+}
+
+.upload-text {
+    text-align: center;
+}
+
+.upload-text span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.upload-text small {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+.image-preview {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.remove-image-btn:hover {
+    background: rgba(220, 53, 69, 1);
+    transform: scale(1.1);
+}
+
+/* Profile Photo in Preview */
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+/* Watermark Styles */
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 4rem;
+    font-weight: bold;
+    color: rgba(214, 51, 132, 0.1);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 0.5rem;
+}
+
+.live-preview .watermark {
+    display: block;
+}
+
+/* Homepage Sample Cards with Images */
+.sample-photo {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    border: 2px solid #dee2e6;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sample-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Enhanced PDF Generation Styles */
+@media print {
+    .watermark {
+        display: none !important;
+    }
+
+    .preview-header {
+        display: none !important;
+    }
+
+    .traditional-biodata {
+        box-shadow: none !important;
+        border: 2px solid #d4af37 !important;
+    }
+
+    .profile-photo {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* Mobile Responsiveness for Image Upload */
+@media (max-width: 768px) {
+
+    .image-upload-placeholder,
+    .image-preview {
+        width: 150px;
+        height: 200px;
+    }
+
+    .upload-icon {
+        font-size: 2rem;
+    }
+
+    .watermark {
+        font-size: 2.5rem;
+    }
+}
+
+/* Enhanced Traditional Photo Placeholder */
+.traditional-photo {
+    position: relative;
+    overflow: hidden;
+}
+
+.traditional-photo .profile-photo {
+    border-radius: 10px;
+}
+
+/* Loading state for PDF generation */
+#pdf-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#pdf-button:disabled::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Better image quality for preview */
+.preview-content img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Enhanced sample cards */
+.sample-card {
+    transition: all 0.3s ease;
+}
+
+.sample-card:hover {
+    transform: translateY(-5px) rotate(0deg) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.sample-card:hover .sample-photo {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Sam
+ple Gallery Styles */
+.sample-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    aspect-ratio: 3/4;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 20px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+.gallery-overlay span {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .sample-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .gallery-overlay {
+        transform: translateY(0);
+        background: rgba(0, 0, 0, 0.6);
+        padding: 15px;
+    }
+}
+
+/* 
+New Layout with Photo on Right Side */
+.biodata-main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.biodata-content {
+    flex: 1;
+    display: block !important;
+    /* Override grid layout */
+}
+
+.biodata-photo-section {
+    flex-shrink: 0;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.biodata-photo-section .traditional-photo {
+    width: 180px;
+    max-width: 180px;
+    height: 220px;
+    max-height: 220px;
+    margin: 0;
+    border: 3px solid #d4af37;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.biodata-photo-section .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Adjust header layout without photo */
+.biodata-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #f8d7da;
+}
+
+.biodata-header .traditional-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.biodata-header .traditional-name {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #d63384;
+    text-transform: capitalize;
+    margin-top: 10px;
+}
+
+/* Ensure proper A4 sizing for PDF */
+#biodata-content {
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 20mm;
+    box-sizing: border-box;
+    background: white;
+}
+
+/* Mobile responsiveness for new layout */
+@media (max-width: 768px) {
+    .biodata-main-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .biodata-photo-section {
+        width: 100%;
+        order: -1;
+        /* Show photo at top on mobile */
+    }
+
+    .biodata-photo-section .traditional-photo {
+        width: 150px;
+        height: 180px;
+    }
+}
+
+/* Preview content scaling for sidebar */
+.preview-content .biodata-main-content {
+    gap: 15px;
+}
+
+.preview-content .biodata-photo-section {
+    width: 120px;
+}
+
+.preview-content .biodata-photo-section .traditional-photo {
+    width: 100px;
+    height: 120px;
+}
+
+/* PDF specific styles */
+@media print {
+    #biodata-content {
+        max-width: none;
+        min-height: none;
+        padding: 15mm;
+    }
+
+    .biodata-main-content {
+        gap: 20px;
+    }
+
+    .biodata-photo-section .traditional-photo {
+        width: 160px;
+        height: 200px;
+    }
+}
+
+/* Remove form submission since we're using direct PDF download */
+.form-container form {
+    margin-bottom: 0;
+}
+
+/* Style the PDF download button */
+.btn-center {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(214, 51, 132, 0.1);
+}
+
+#pdf-button {
+    font-size: 1.2rem;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+#pdf-button:hover {
+    background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
+}
+
+#pdf-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/ * Image Cropper Modal Styles */ .image-cropper-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cropper-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cropper-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.cropper-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.crop-area {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.cropper-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.cropper-actions .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+}
+
+/* Traditional Biodata Layout - Matching Reference Image */
+#biodata-content {
+    background: #f8f6f0;
+    border: 8px solid #d4af37;
+    border-radius: 0;
+    position: relative;
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 20mm;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Decorative Corners */
+.decorative-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #d4af37, #b8941f);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.corner.top-left {
+    top: 8px;
+    left: 8px;
+}
+
+.corner.top-right {
+    top: 8px;
+    right: 8px;
+    transform: rotate(90deg);
+}
+
+.corner.bottom-left {
+    bottom: 8px;
+    left: 8px;
+    transform: rotate(-90deg);
+}
+
+.corner.bottom-right {
+    bottom: 8px;
+    right: 8px;
+    transform: rotate(180deg);
+}
+
+/* Decorative Side Elements */
+.decorative-sides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.side-decoration {
+    position: absolute;
+    width: 30px;
+    height: 200px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 200"><path d="M15,10 Q20,20 15,30 Q10,40 15,50 Q20,60 15,70 Q10,80 15,90 Q20,100 15,110 Q10,120 15,130 Q20,140 15,150 Q10,160 15,170 Q20,180 15,190" fill="none" stroke="%23d4af37" stroke-width="2"/></svg>') repeat-y;
+}
+
+.left-side {
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right-side {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Header Styling */
+.biodata-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+
+.ganesh-symbol {
+    font-size: 3rem;
+    color: #d63384;
+    margin-bottom: 10px;
+}
+
+.traditional-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #8b4513;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.traditional-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+/* Main Content Layout */
+.biodata-main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.biodata-content {
+    flex: 1;
+}
+
+/* Section Styling */
+.traditional-section {
+    margin-bottom: 25px;
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.traditional-section-title {
+    background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+    color: white;
+    padding: 8px 15px;
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 0;
+}
+
+/* Info List Styling */
+.info-list {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #d4af37;
+    padding: 0;
+}
+
+.info-row {
+    display: flex;
+    padding: 6px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row:nth-child(even) {
+    background: rgba(248, 246, 240, 0.8);
+}
+
+.info-label {
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 150px;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: #2c3e50;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+/* Photo Section */
+.biodata-photo-section {
+    flex-shrink: 0;
+    width: 220px;
+    display: flex;
+    justify-content: center;
+}
+
+.photo-frame {
+    width: 200px;
+    height: 250px;
+    border: 4px solid #d4af37;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-frame .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.photo-frame .photo-placeholder {
+    color: #6c757d;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Footer */
+.biodata-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #d4af37;
+}
+
+.footer-decoration {
+    height: 20px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin-bottom: 10px;
+}
+
+.footer-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Watermark for Preview */
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 6rem;
+    font-weight: bold;
+    color: rgba(214, 51, 132, 0.08);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 1rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #biodata-content {
+        padding: 15mm;
+        border-width: 4px;
+    }
+
+    .biodata-main-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .biodata-photo-section {
+        width: 100%;
+        order: -1;
+    }
+
+    .photo-frame {
+        width: 180px;
+        height: 220px;
+        margin: 0 auto;
+    }
+
+    .traditional-title {
+        font-size: 1.8rem;
+    }
+
+    .traditional-name {
+        font-size: 1.5rem;
+    }
+
+    .corner {
+        width: 40px;
+        height: 40px;
+    }
+
+    .side-decoration {
+        display: none;
+    }
+
+    .watermark {
+        font-size: 3rem;
+    }
+}
+
+/* Preview Sidebar Scaling */
+.preview-content #biodata-content {
+    transform: scale(0.4);
+    transform-origin: top left;
+    width: 250%;
+    margin-bottom: -60%;
+}
+
+.preview-content .watermark {
+    font-size: 4rem;
+}
+
+/* Print Styles */
+@media print {
+    #biodata-content {
+        max-width: none;
+        min-height: none;
+        margin: 0;
+        padding: 15mm;
+        border-width: 6px;
+    }
+
+    .watermark {
+        display: none !important;
+    }
+
+    .photo-frame {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/*
+ Updated Layout - Photo only next to Personal Details */
+.biodata-main-content {
+    display: block !important;
+}
+
+.personal-details-with-photo {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.personal-details-content {
+    flex: 1;
+}
+
+.full-width-sections {
+    width: 100%;
+}
+
+.full-width-sections .info-section {
+    width: 100%;
+}
+
+/* Override existing photo section styles */
+.personal-details-with-photo .biodata-photo-section {
+    flex-shrink: 0;
+    width: 220px;
+    display: flex;
+    justify-content: center;
+}
+
+.personal-details-with-photo .photo-frame {
+    width: 200px;
+    height: 250px;
+    border: 4px solid #d4af37;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Responsiveness for New Layout */
+@media (max-width: 768px) {
+    .personal-details-with-photo {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .personal-details-with-photo .biodata-photo-section {
+        width: 100%;
+        order: -1;
+    }
+
+    .personal-details-with-photo .photo-frame {
+        width: 180px;
+        height: 220px;
+        margin: 0 auto;
+    }
+}
+
+/* Preview Sidebar Adjustments */
+.preview-content .personal-details-with-photo {
+    gap: 15px;
+}
+
+.preview-content .personal-details-with-photo .biodata-photo-section {
+    width: 120px;
+}
+
+.preview-content .personal-details-with-photo .photo-frame {
+    width: 100px;
+    height: 120px;
+}
+
+/ * PDF Generation Quality Improvements */ #biodata-content {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+#biodata-content * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Ensure images are high quality */
+#biodata-content img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+    -ms-interpolation-mode: bicubic;
+}
+
+/* Better text rendering for PDF */
+#biodata-content .info-label,
+#biodata-content .info-value,
+#biodata-content .traditional-section-title,
+#biodata-content .traditional-title,
+#biodata-content .traditional-name {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga", "kern";
+}
+
+/* Ensure borders and decorations are crisp */
+#biodata-content .info-list,
+#biodata-content .photo-frame,
+#biodata-content .traditional-section-title {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* PDF specific optimizations */
+@media print {
+    #biodata-content {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    #biodata-content * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
     }
 }

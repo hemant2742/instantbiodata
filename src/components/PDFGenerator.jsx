@@ -1,144 +1,84 @@
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 
 const PDFGenerator = ({ data }) => {
-    const generatePDF = async () => {
-        const element = document.getElementById('biodata-content');
-        if (!element) return;
+  const generatePDF = async () => {
+    const element = document.getElementById('biodata-content')
+    if (!element) return
 
-        try {
-            // Show loading state
-            const button = document.getElementById('pdf-button');
-            const originalText = button.textContent;
-            button.textContent = 'Generating PDF...';
-            button.disabled = true;
+    const button = document.getElementById('pdf-button')
+    const originalText = button.textContent
 
-            // Remove watermark for PDF generation
-            const watermark = element.querySelector('.watermark');
-            if (watermark) {
-                watermark.style.display = 'none';
-            }
+    try {
+      button.textContent = 'Generating PDF...'
+      button.disabled = true
 
-            // Wait a moment for the DOM to update
-            await new Promise(resolve => setTimeout(resolve, 100));
+      // PDF render mode
+      element.classList.add('pdf-mode')
 
-            console.log('Element dimensions:', {
-                width: element.offsetWidth,
-                height: element.offsetHeight,
-                scrollWidth: element.scrollWidth,
-                scrollHeight: element.scrollHeight
-            });
+      // Force layout settle
+      await new Promise(r => setTimeout(r, 300))
 
-            // Create canvas with optimized settings for quality
-            const canvas = await html2canvas(element, {
-                scale: 3, // Good balance between quality and performance
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#f8f6f0', // Match the biodata background
-                logging: true, // Enable logging for debugging
-                width: element.offsetWidth,
-                height: element.offsetHeight,
-                scrollX: 0,
-                scrollY: 0,
-                windowWidth: element.offsetWidth,
-                windowHeight: element.offsetHeight,
-                imageTimeout: 15000,
-                removeContainer: false,
-                foreignObjectRendering: false, // Sometimes causes issues
-                letterRendering: true
-            });
+      const canvas = await html2canvas(element, {
+        scale: 4,                 // MAX useful DPI (anything above is waste)
+        useCORS: true,
+        backgroundColor: null,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: 794,
+        windowHeight: element.scrollHeight,
+        letterRendering: true,    // Improves glyph edges
+        imageTimeout: 20000
+      })
 
-            console.log('Canvas dimensions:', {
-                width: canvas.width,
-                height: canvas.height
-            });
+      element.classList.remove('pdf-mode')
 
-            // Restore watermark
-            if (watermark) {
-                watermark.style.display = '';
-            }
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+        compress: true
+      })
 
-            // Check if canvas is valid
-            if (!canvas || canvas.width === 0 || canvas.height === 0) {
-                throw new Error('Canvas generation failed');
-            }
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width
 
-            // Convert to high quality PNG
-            const imgData = canvas.toDataURL('image/png', 1.0);
+      const imgData = canvas.toDataURL('image/png')
 
-            // Create PDF with A4 dimensions
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
+      pdf.addImage(
+        imgData,
+        'PNG',
+        0,
+        0,
+        pdfWidth,
+        pdfHeight,
+        undefined,
+        'FAST'
+      )
 
-            // Calculate dimensions to fit A4 with margins
-            const margin = 15;
-            const availableWidth = pdfWidth - (2 * margin);
-            const availableHeight = pdfHeight - (2 * margin);
+      pdf.save(
+        data?.name
+          ? `${data.name.replace(/\s+/g, '_')}_Biodata.pdf`
+          : 'Biodata.pdf'
+      )
+    } catch (e) {
+      console.error(e)
+      alert('PDF generation failed')
+    } finally {
+      button.textContent = originalText
+      button.disabled = false
+    }
+  }
 
-            // Calculate scaling to maintain aspect ratio
-            const canvasAspectRatio = canvas.width / canvas.height;
-            const availableAspectRatio = availableWidth / availableHeight;
+  return (
+    <button
+      id="pdf-button"
+      onClick={generatePDF}
+      className="btn btn-success"
+    >
+      📄 Download PDF
+    </button>
+  )
+}
 
-            let imgWidth, imgHeight;
-
-            if (canvasAspectRatio > availableAspectRatio) {
-                // Canvas is wider relative to available space
-                imgWidth = availableWidth;
-                imgHeight = availableWidth / canvasAspectRatio;
-            } else {
-                // Canvas is taller relative to available space
-                imgHeight = availableHeight;
-                imgWidth = availableHeight * canvasAspectRatio;
-            }
-
-            // Center the content on the page
-            const x = (pdfWidth - imgWidth) / 2;
-            const y = (pdfHeight - imgHeight) / 2;
-
-            // Add image to PDF
-            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight, undefined, 'MEDIUM');
-
-            // Generate filename
-            const fileName = data.name ?
-                `${data.name.replace(/\s+/g, '_')}_Biodata.pdf` :
-                'Biodata.pdf';
-
-            // Save the PDF
-            pdf.save(fileName);
-
-            // Reset button state
-            button.textContent = originalText;
-            button.disabled = false;
-
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('Error generating PDF. Please try again.');
-
-            // Restore watermark if it was hidden
-            const watermark = element?.querySelector('.watermark');
-            if (watermark) {
-                watermark.style.display = '';
-            }
-
-            // Reset button state
-            const button = document.getElementById('pdf-button');
-            if (button) {
-                button.textContent = '📄 Download PDF';
-                button.disabled = false;
-            }
-        }
-    };
-
-    return (
-        <button
-            id="pdf-button"
-            onClick={generatePDF}
-            className="btn btn-success"
-        >
-            📄 Download PDF
-        </button>
-    );
-};
-
-export default PDFGenerator;
+export default PDFGenerator

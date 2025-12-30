@@ -2519,8 +2519,7 @@ New Layout with Photo on Right Side */
     cursor: not-allowed;
     transform: none;
 }
-
-/ * Image Cropper Modal Styles */ .image-cropper-modal {
+.image-cropper-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -3042,4 +3041,172 @@ New Layout with Photo on Right Side */
         print-color-adjust: exact;
         color-adjust: exact;
     }
+}
+
+/* H
+igh-Quality PDF Generation Styles */
+#biodata-content {
+    /* Ensure crisp rendering */
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: geometricPrecision;
+
+    /* Prevent blurry transforms */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    /* Optimize for print */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+/* Ensure all text is crisp */
+#biodata-content * {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: geometricPrecision;
+
+    /* Prevent sub-pixel positioning issues */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Optimize images for PDF */
+#biodata-content img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: bicubic;
+
+    /* Ensure images are sharp */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Ensure borders are pixel-perfect */
+#biodata-content .info-list,
+#biodata-content .photo-frame,
+#biodata-content .traditional-section-title,
+#biodata-content .corner {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Font optimization for PDF */
+#biodata-content .info-label,
+#biodata-content .info-value {
+    font-family: 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#biodata-content .traditional-section-title {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+#biodata-content .traditional-title {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+#biodata-content .traditional-name {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+/* Ensure consistent spacing */
+#biodata-content .info-row {
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+/* PDF-specific optimizations */
+@media print {
+    #biodata-content {
+        width: 210mm !important;
+        max-width: 210mm !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+    }
+
+    #biodata-content * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+}
+
+/* ===== MAX CLARITY PDF MODE ===== */
+
+.pdf-mode {
+  background: #fffdf7 !important;
+}
+
+/* NEVER let opacity affect text */
+.pdf-mode * {
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* Background pattern ONLY */
+.pdf-mode .background-pattern,
+.pdf-mode .decorative-layer {
+  opacity: 0.08 !important; /* lower than before */
+}
+
+/* REMOVE watermark completely for PDF */
+.pdf-mode .watermark {
+  display: none !important;
+}
+
+/* Headings */
+.pdf-mode h1,
+.pdf-mode h2,
+.pdf-mode h3 {
+  color: #111 !important;
+  font-weight: 700 !important;
+}
+
+/* Section headers */
+.pdf-mode .section-title {
+  background: #e3cf8f !important;
+  color: #111 !important;
+  font-weight: 700 !important;
+}
+
+/* Labels */
+.pdf-mode .label,
+.pdf-mode th {
+  color: #222 !important;
+  font-weight: 600 !important;
+}
+
+/* Values */
+.pdf-mode td,
+.pdf-mode span,
+.pdf-mode p,
+.pdf-mode div {
+  color: #111 !important;
+  font-weight: 400 !important;
+}
+
+/* Avoid light greys */
+.pdf-mode .muted,
+.pdf-mode .light-text {
+  color: #333 !important;
 }

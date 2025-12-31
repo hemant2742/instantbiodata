@@ -20,6 +20,9 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                 weight: '',
                 complexion: '',
                 bloodGroup: '',
+                maritalStatus: '',
+                religion: '',
+                caste: '',
                 fatherName: '',
                 fatherOccupation: '',
                 motherName: '',
@@ -52,6 +55,9 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                 weight: '',
                 complexion: '',
                 bloodGroup: '',
+                maritalStatus: '',
+                religion: '',
+                caste: '',
                 fatherName: '',
                 fatherOccupation: '',
                 motherName: '',
@@ -79,6 +85,13 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
     const [formData, setFormData] = useState(loadSavedData);
     const [showCropper, setShowCropper] = useState(false);
     const [tempImage, setTempImage] = useState(null);
+
+    // Ensure formData always has default values
+    useEffect(() => {
+        if (!formData || Object.keys(formData).length === 0) {
+            setFormData(loadSavedData());
+        }
+    }, []);
 
     // Save to localStorage whenever form data changes
     useEffect(() => {
@@ -276,7 +289,7 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                                     <input
                                         type="text"
                                         name="name"
-                                        value={formData.name}
+                                        value={formData.name || ''}
                                         onChange={handleChange}
                                         required
                                         className="form-input"
@@ -287,7 +300,7 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                                     <input
                                         type="date"
                                         name="dateOfBirth"
-                                        value={formData.dateOfBirth}
+                                        value={formData.dateOfBirth || ''}
                                         onChange={handleChange}
                                         required
                                         className="form-input"
@@ -353,7 +366,7 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                                     <label className="form-label">Blood Group</label>
                                     <select
                                         name="bloodGroup"
-                                        value={formData.bloodGroup}
+                                        value={formData.bloodGroup || ''}
                                         onChange={handleChange}
                                         className="form-select"
                                     >
@@ -367,6 +380,41 @@ const BiodataForm = ({ onSubmit, selectedTemplate }) => {
                                         <option value="O+">O+</option>
                                         <option value="O-">O-</option>
                                     </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Marital Status</label>
+                                    <select
+                                        name="maritalStatus"
+                                        value={formData.maritalStatus || ''}
+                                        onChange={handleChange}
+                                        className="form-select"
+                                    >
+                                        <option value="">Select</option>
+                                        <option value="Never Married">Never Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Religion</label>
+                                    <input
+                                        type="text"
+                                        name="religion"
+                                        value={formData.religion || ''}
+                                        onChange={handleChange}
+                                        className="form-input"
+                                        placeholder="e.g., Hindu, Muslim, Christian"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Caste</label>
+                                    <input
+                                        type="text"
+                                        name="caste"
+                                        value={formData.caste || ''}
+                                        onChange={handleChange}
+                                        className="form-input"
+                                    />
                                 </div>
                             </div>
                         </section>

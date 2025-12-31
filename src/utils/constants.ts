@@ -166,8 +166,8 @@ export const TEMPLATES: Template[] = [
 
 // PDF generation constants
 export const PDF_CONFIG = {
-  DEFAULT_SCALE: 6, // Increased for better quality
-  MAX_SCALE: 8,
+  DEFAULT_SCALE: 2, // Reduced for A4 to avoid memory issues
+  MAX_SCALE: 4,
   DEFAULT_QUALITY: 1.0, // Maximum quality
   TIMEOUT: 30000, // Increased timeout
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB

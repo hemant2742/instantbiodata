@@ -1353,6 +1353,7 @@ nk styling to match buttons */
 }
 
 a.btn {
+    text-align: center;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -1796,16 +1797,17 @@ a.nav-item:hover {
 }
 
 .preview-sidebar {
-    position: sticky;
-    top: 20px;
-    height: fit-content;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .preview-sidebar .preview-header {
@@ -1827,7 +1829,12 @@ a.nav-item:hover {
 }
 
 .preview-content {
-    padding: 20px;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
 }
 
 .preview-content .preview-container {
@@ -1836,14 +1843,20 @@ a.nav-item:hover {
     padding: 0;
     margin: 0;
     border-radius: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .preview-content .traditional-biodata {
-    transform: scale(0.6);
-    transform-origin: top left;
-    width: 166.67%;
-    /* Compensate for scale */
-    margin-bottom: -40%;
+    width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    transform-origin: unset !important;
+    scale: none !important;
+    font-size: 0.8rem;
 }
 
 .preview-content .biodata-header {
@@ -1860,9 +1873,9 @@ a.nav-item:hover {
 }
 
 .preview-content .traditional-photo {
-    width: 80px;
-    height: 100px;
-    margin: 15px auto;
+    width: 60px;
+    height: 80px;
+    margin: 10px auto;
 }
 
 .preview-content .traditional-section {
@@ -1918,9 +1931,7 @@ a.nav-item:hover {
     }
 
     .preview-content .traditional-biodata {
-        transform: scale(0.8);
-        width: 125%;
-        margin-bottom: -20%;
+        font-size: 0.7rem;
     }
 }
 
@@ -1942,9 +1953,7 @@ a.nav-item:hover {
     }
 
     .preview-content .traditional-biodata {
-        transform: scale(0.7);
-        width: 142.86%;
-        margin-bottom: -30%;
+        font-size: 0.6rem;
     }
 }
 
@@ -2979,19 +2988,20 @@ New Layout with Photo on Right Side */
 
 /* Preview Sidebar Adjustments */
 .preview-content .personal-details-with-photo {
-    gap: 15px;
+    gap: 10px;
 }
 
 .preview-content .personal-details-with-photo .biodata-photo-section {
-    width: 120px;
+    width: 80px;
 }
 
 .preview-content .personal-details-with-photo .photo-frame {
-    width: 100px;
-    height: 120px;
+    width: 70px;
+    height: 90px;
 }
 
-/ * PDF Generation Quality Improvements */ #biodata-content {
+/* PDF Generation Quality Improvements */
+#biodata-content {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
@@ -3039,13 +3049,11 @@ New Layout with Photo on Right Side */
     #biodata-content {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        color-adjust: exact;
     }
 
     #biodata-content * {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        color-adjust: exact;
     }
 }
 
@@ -3066,7 +3074,6 @@ igh-Quality PDF Generation Styles */
     /* Optimize for print */
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    color-adjust: exact;
 }
 
 /* Ensure all text is crisp */
@@ -3152,14 +3159,13 @@ igh-Quality PDF Generation Styles */
     #biodata-content * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        color-adjust: exact !important;
     }
 }
 
 /* ===== MAX CLARITY PDF MODE ===== */
 
 .pdf-mode {
-    background: #fffdf7 !important;
+    background: #ffffff !important;
 }
 
 /* NEVER let opacity affect text */
@@ -3172,8 +3178,7 @@ igh-Quality PDF Generation Styles */
 /* Background pattern ONLY */
 .pdf-mode .background-pattern,
 .pdf-mode .decorative-layer {
-    opacity: 0.08 !important;
-    /* lower than before */
+    opacity: 0.05 !important;
 }
 
 /* REMOVE watermark completely for PDF */
@@ -3185,21 +3190,22 @@ igh-Quality PDF Generation Styles */
 .pdf-mode h1,
 .pdf-mode h2,
 .pdf-mode h3 {
-    color: #111 !important;
+    color: #000000 !important;
     font-weight: 700 !important;
 }
 
 /* Section headers */
 .pdf-mode .section-title {
-    background: #e3cf8f !important;
-    color: #111 !important;
+    background: #f8f9fa !important;
+    color: #000000 !important;
     font-weight: 700 !important;
+    border: 1px solid #dee2e6 !important;
 }
 
 /* Labels */
 .pdf-mode .label,
 .pdf-mode th {
-    color: #222 !important;
+    color: #000000 !important;
     font-weight: 600 !important;
 }
 
@@ -3208,14 +3214,14 @@ igh-Quality PDF Generation Styles */
 .pdf-mode span,
 .pdf-mode p,
 .pdf-mode div {
-    color: #111 !important;
+    color: #000000 !important;
     font-weight: 400 !important;
 }
 
 /* Avoid light greys */
 .pdf-mode .muted,
 .pdf-mode .light-text {
-    color: #333 !important;
+    color: #333333 !important;
 }
 
 /* FAQs Section Styles */
@@ -3620,7 +3626,8 @@ html {
     animation: fadeInUp 0.8s ease-out;
 }
 
-/ * Sample Gallery Styles */ .sample-gallery {
+/* Sample Gallery Styles */
+.sample-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
@@ -3756,4 +3763,356 @@ html {
 /* Additional scroll padding for better UX */
 .faqs-section {
     scroll-margin-top: 80px;
+}
+
+/* 
+/* Enhanced Preview Responsive Styles */
+@media (max-width: 1200px) {
+    .preview-content .traditional-biodata {
+        transform: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        height: 100% !important;
+        scale: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .preview-sidebar {
+        position: relative;
+        top: auto;
+        max-height: 600px;
+    }
+
+    .preview-content .traditional-biodata {
+        transform: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        height: 100% !important;
+        scale: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .preview-content .traditional-biodata {
+        transform: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        height: 100% !important;
+        scale: none !important;
+    }
+
+    .preview-sidebar {
+        max-height: 500px;
+        order: -1;
+    }
+}
+
+/* Live Preview Full Size Styles */
+.preview-content .live-preview {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.preview-content .live-preview .biodata-main-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.preview-content .live-preview .traditional-header {
+    margin-bottom: 20px !important;
+    padding-bottom: 15px !important;
+}
+
+.preview-content .live-preview .ganesh-symbol {
+    font-size: 1.5rem !important;
+}
+
+.preview-content .live-preview .traditional-name {
+    font-size: 1.3rem !important;
+}
+
+.preview-content .live-preview .traditional-section-title {
+    font-size: 0.9rem !important;
+    padding: 8px 15px !important;
+}
+
+.preview-content .live-preview .info-row {
+    padding: 3px 15px !important;
+    font-size: 0.75rem !important;
+}
+
+.preview-content .live-preview .info-label {
+    min-width: 100px !important;
+    font-size: 0.75rem !important;
+}
+
+.preview-content .live-preview .biodata-photo-section .photo-frame {
+    width: 80px !important;
+    height: 100px !important;
+}
+
+.preview-content .live-preview .profile-photo {
+    width: 80px !important;
+    height: 100px !important;
+}
+
+.preview-content .live-preview .photo-placeholder {
+    width: 80px !important;
+    height: 100px !important;
+    font-size: 0.7rem !important;
+}
+
+/* Remove any outer wrapper margins */
+.preview-content>div {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.preview-content>div>.traditional-biodata {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    min-height: 100% !important;
+}
+
+/*
+ Prevent any resizing of live preview */
+.preview-content .live-preview,
+.preview-content .live-preview * {
+    transform: none !important;
+    scale: none !important;
+    zoom: 1 !important;
+}
+
+.preview-content .live-preview {
+    position: relative !important;
+    overflow: hidden !important;
+    font-size: 12px !important;
+}
+
+/* Override any existing biodata styles for live preview */
+.live-preview.traditional-biodata {
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    transform: none !important;
+    scale: none !important;
+}
+
+/* Ensure content fits properly */
+.live-preview .biodata-main-content {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.live-preview .personal-details-with-photo {
+    display: flex !important;
+    gap: 10px !important;
+    margin-bottom: 15px !important;
+}
+
+.live-preview .personal-details-content {
+    flex: 1 !important;
+}
+
+.live-preview .biodata-photo-section {
+    flex-shrink: 0 !important;
+}
+
+.live-preview .full-width-sections {
+    margin-top: 10px !important;
+}
+
+.live-preview .traditional-section {
+    margin-bottom: 10px !important;
+}
+
+.live-preview .traditional-section-title {
+    font-size: 10px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+}
+
+.live-preview .info-row {
+    padding: 2px 10px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+}
+
+.live-preview .info-label {
+    min-width: 80px !important;
+    font-size: 9px !important;
+}
+
+.live-preview .biodata-header {
+    margin-bottom: 15px !important;
+    padding-bottom: 10px !important;
+}
+
+.live-preview .ganesh-symbol {
+    font-size: 16px !important;
+}
+
+.live-preview .traditional-name {
+    font-size: 14px !important;
+    margin-top: 8px !important;
+}
+
+/* Disa
+ble any animations/transitions that might cause resizing */
+.preview-content .live-preview,
+.preview-content .live-preview *,
+.preview-content .traditional-biodata,
+.preview-content .traditional-biodata * {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+}
+
+/* Force stable dimensions */
+.preview-sidebar {
+    contain: layout style !important;
+}
+
+.preview-content {
+    contain: layout !important;
+    position: relative !important;
+}
+
+/* Prevent any flex or grid resizing */
+.preview-content .live-preview {
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+}
+
+/* PDF Generation Styles */
+.pdf-mode {
+    width: 100% !important;
+    height: 100% !important;
+    background: white !important;
+    padding: 20mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    scale: none !important;
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+}
+
+.pdf-mode .live-preview {
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    scale: none !important;
+    padding: 0 !important;
+}
+
+.pdf-mode .watermark {
+    display: none !important;
+}
+
+.pdf-mode .traditional-section-title {
+    background: #f0f0f0 !important;
+    color: #000000 !important;
+    border: 1px solid #cccccc !important;
+    font-weight: 700 !important;
+}
+
+.pdf-mode .info-row {
+    padding: 6pt 15pt !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+}
+
+.pdf-mode .info-label {
+    min-width: 120pt !important;
+    font-size: 11pt !important;
+    font-weight: 600 !important;
+}
+
+.pdf-mode .info-value {
+    font-size: 11pt !important;
+}
+
+.pdf-mode .traditional-name {
+    font-size: 18pt !important;
+    margin-top: 10pt !important;
+}
+
+.pdf-mode .ganesh-symbol {
+    font-size: 24pt !important;
+}
+
+.pdf-mode .biodata-header {
+    margin-bottom: 20pt !important;
+    padding-bottom: 15pt !important;
+}
+
+.pdf-mode .profile-photo,
+.pdf-mode .uploaded-image-enhanced {
+    width: 80pt !important;
+    height: 100pt !important;
+}
+
+.pdf-mode .photo-placeholder {
+    width: 80pt !important;
+    height: 100pt !important;
+    font-size: 10pt !important;
+}
+
+.pdf-mode .personal-details-with-photo {
+    display: flex !important;
+    gap: 15pt !important;
+    margin-bottom: 20pt !important;
+}
+
+.pdf-mode .personal-details-content {
+    flex: 1 !important;
+}
+
+.pdf-mode .biodata-photo-section {
+    flex-shrink: 0 !important;
+}
+
+.pdf-mode .traditional-section {
+    margin-bottom: 15pt !important;
+    page-break-inside: avoid !important;
+}
+
+.pdf-mode .traditional-biodata {
+    border: none !important;
+    background: white !important;
+    box-shadow: none !important;
+}
+
+.pdf-mode .decorative-corners,
+.pdf-mode .decorative-sides,
+.pdf-mode .decorative-border-top,
+.pdf-mode .decorative-border-bottom,
+.pdf-mode .traditional-biodata::before,
+.pdf-mode .traditional-biodata::after {
+    display: none !important;
+}
+
+.pdf-mode .traditional-biodata {
+    border: none !important;
+    background: white !important;
+    box-shadow: none !important;
 }

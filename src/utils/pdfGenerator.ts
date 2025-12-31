@@ -50,21 +50,56 @@ class PDFGenerator {
   }
 
   private async optimizeForPDF(element: HTMLElement): Promise<void> {
+    // Create a temporary container for PDF generation
+    const tempContainer = document.createElement('div');
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.top = '-9999px';
+    tempContainer.style.width = '210mm'; // A4 width
+    tempContainer.style.height = '297mm'; // A4 height
+    tempContainer.style.overflow = 'visible';
+    tempContainer.style.background = 'white';
+    tempContainer.style.padding = '0';
+    tempContainer.style.margin = '0';
+
+    // Clone the element
+    const clonedElement = element.cloneNode(true) as HTMLElement;
+    clonedElement.style.width = '100%';
+    clonedElement.style.height = '100%';
+    clonedElement.style.maxWidth = 'none';
+    clonedElement.style.position = 'relative';
+    clonedElement.style.margin = '0';
+    clonedElement.style.padding = '0';
+
     // Add PDF-specific class for styling
-    element.classList.add('pdf-mode');
-    
+    clonedElement.classList.add('pdf-mode');
+
+    tempContainer.appendChild(clonedElement);
+    document.body.appendChild(tempContainer);
+
     // Force layout recalculation
-    element.offsetHeight;
-    
+    clonedElement.offsetHeight;
+
     // Wait for any CSS transitions to complete
     await new Promise(resolve => setTimeout(resolve, 300));
-    
+
     // Ensure all images are loaded
-    await this.waitForImages(element);
+    await this.waitForImages(clonedElement);
+
+    // Store the temp container for cleanup
+    (element as any)._pdfTempContainer = tempContainer;
+    (element as any)._pdfClonedElement = clonedElement;
   }
 
   private cleanupAfterPDF(element: HTMLElement): void {
-    element.classList.remove('pdf-mode');
+    // Remove temporary container
+    const tempContainer = (element as any)._pdfTempContainer;
+    if (tempContainer && tempContainer.parentNode) {
+      tempContainer.parentNode.removeChild(tempContainer);
+    }
+
+    delete (element as any)._pdfTempContainer;
+    delete (element as any)._pdfClonedElement;
   }
 
   private generateFilename(data: BiodataData, options?: PDFOptions): string {
@@ -76,15 +111,21 @@ class PDFGenerator {
   }
 
   private async captureElement(element: HTMLElement, options: PDFOptions): Promise<HTMLCanvasElement> {
-    const canvas = await html2canvas(element, {
-      scale: Math.min(options.scale, 6), // Limit scale to prevent memory issues
+    // Use the temp container for capturing (it's set to A4 dimensions)
+    const tempContainer = (element as any)._pdfTempContainer;
+
+    // Force layout recalculation to get correct dimensions
+    tempContainer.offsetHeight;
+
+    const canvas = await html2canvas(tempContainer, {
+      scale: Math.min(options.scale, 4), // Lower scale for A4 to avoid memory issues
       useCORS: true,
       allowTaint: false,
       backgroundColor: '#ffffff',
       scrollX: 0,
       scrollY: 0,
-      windowWidth: element.scrollWidth,
-      windowHeight: element.scrollHeight,
+      width: tempContainer.offsetWidth,
+      height: tempContainer.offsetHeight,
       letterRendering: true,
       imageTimeout: PDF_CONFIG.TIMEOUT,
       logging: false,
@@ -92,46 +133,8 @@ class PDFGenerator {
       foreignObjectRendering: false,
       ignoreElements: (element) => {
         // Ignore watermark and other non-essential elements
-        return element.classList.contains('watermark') || 
+        return element.classList.contains('watermark') ||
                element.classList.contains('live-preview-only');
-      },
-      onclone: (clonedDoc) => {
-        // Enhance cloned document for better PDF rendering
-        const clonedElement = clonedDoc.getElementById('biodata-content');
-        if (clonedElement) {
-          clonedElement.classList.add('pdf-mode');
-          
-          // Enhance text contrast and colors for PDF
-          const style = clonedDoc.createElement('style');
-          style.textContent = `
-            .pdf-mode {
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-              color-adjust: exact !important;
-            }
-            .pdf-mode * {
-              -webkit-font-smoothing: antialiased !important;
-              -moz-osx-font-smoothing: grayscale !important;
-            }
-            .pdf-mode .info-label {
-              color: #000000 !important;
-              font-weight: 600 !important;
-            }
-            .pdf-mode .info-value {
-              color: #1a1a1a !important;
-              font-weight: 500 !important;
-            }
-            .pdf-mode .traditional-section-title {
-              color: #ffffff !important;
-              font-weight: 700 !important;
-            }
-            .pdf-mode .traditional-name {
-              color: #8b4513 !important;
-              font-weight: 700 !important;
-            }
-          `;
-          clonedDoc.head.appendChild(style);
-        }
       }
     });
 
@@ -149,34 +152,20 @@ class PDFGenerator {
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-    
-    // Calculate dimensions to fit the page while maintaining aspect ratio
-    const canvasAspectRatio = canvas.width / canvas.height;
-    const pdfAspectRatio = pdfWidth / pdfHeight;
-    
-    let imgWidth = pdfWidth - 10; // 5mm margin on each side
-    let imgHeight = pdfHeight - 10; // 5mm margin on top and bottom
-    
-    if (canvasAspectRatio > pdfAspectRatio) {
-      // Canvas is wider than PDF page
-      imgHeight = imgWidth / canvasAspectRatio;
-    } else {
-      // Canvas is taller than PDF page
-      imgWidth = imgHeight * canvasAspectRatio;
-    }
 
-    // Center the image on the page
-    const xOffset = (pdfWidth - imgWidth) / 2;
-    const yOffset = (pdfHeight - imgHeight) / 2;
+    // For A4, we want to fill the page completely
+    // Scale the canvas to fit A4 dimensions
+    const imgWidth = pdfWidth;
+    const imgHeight = pdfHeight;
 
     // Use PNG for better quality with transparency support
     const imgData = canvas.toDataURL('image/png', 1.0);
-    
+
     pdf.addImage(
       imgData,
       'PNG',
-      xOffset,
-      yOffset,
+      0,
+      0,
       imgWidth,
       imgHeight,
       undefined,

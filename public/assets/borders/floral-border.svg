@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842">
+  <defs>
+    <!-- Floral pink/purple gradient -->
+    <linearGradient id="floralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e91e63;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9c27b0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#673ab7;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Flower pattern -->
+    <pattern id="flowerPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="3" fill="#e91e63" opacity="0.5"/>
+      <!-- Flower petals -->
+      <path d="M20,12 Q17,15 20,18 Q23,15 20,12 Z" fill="#9c27b0" opacity="0.6"/>
+      <path d="M12,20 Q15,23 18,20 Q15,17 12,20 Z" fill="#9c27b0" opacity="0.6"/>
+      <path d="M20,28 Q23,25 20,22 Q17,25 20,28 Z" fill="#9c27b0" opacity="0.6"/>
+      <path d="M28,20 Q25,17 22,20 Q25,23 28,20 Z" fill="#9c27b0" opacity="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- Floral border -->
+  <rect x="12" y="12" width="571" height="818" fill="none" stroke="url(#floralGradient)" stroke-width="6" rx="25"/>
+
+  <!-- Flower pattern background -->
+  <rect x="18" y="18" width="559" height="806" fill="url(#flowerPattern)" opacity="0.3" rx="20"/>
+
+  <!-- Flower corner decorations -->
+  <g opacity="0.7">
+    <!-- Top left flower -->
+    <circle cx="25" cy="25" r="6" fill="#e91e63"/>
+    <circle cx="25" cy="18" r="2" fill="#9c27b0"/>
+    <circle cx="18" cy="25" r="2" fill="#9c27b0"/>
+    <circle cx="32" cy="25" r="2" fill="#9c27b0"/>
+    <circle cx="25" cy="32" r="2" fill="#9c27b0"/>
+
+    <!-- Top right flower -->
+    <circle cx="570" cy="25" r="6" fill="#e91e63"/>
+    <circle cx="570" cy="18" r="2" fill="#9c27b0"/>
+    <circle cx="563" cy="25" r="2" fill="#9c27b0"/>
+    <circle cx="577" cy="25" r="2" fill="#9c27b0"/>
+    <circle cx="570" cy="32" r="2" fill="#9c27b0"/>
+
+    <!-- Bottom left flower -->
+    <circle cx="25" cy="817" r="6" fill="#e91e63"/>
+    <circle cx="25" cy="810" r="2" fill="#9c27b0"/>
+    <circle cx="18" cy="817" r="2" fill="#9c27b0"/>
+    <circle cx="32" cy="817" r="2" fill="#9c27b0"/>
+    <circle cx="25" cy="824" r="2" fill="#9c27b0"/>
+
+    <!-- Bottom right flower -->
+    <circle cx="570" cy="817" r="6" fill="#e91e63"/>
+    <circle cx="570" cy="810" r="2" fill="#9c27b0"/>
+    <circle cx="563" cy="817" r="2" fill="#9c27b0"/>
+    <circle cx="577" cy="817" r="2" fill="#9c27b0"/>
+    <circle cx="570" cy="824" r="2" fill="#9c27b0"/>
+  </g>
+</svg>

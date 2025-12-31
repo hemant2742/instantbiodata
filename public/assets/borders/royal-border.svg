@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842">
+  <defs>
+    <!-- Royal gold/red gradient -->
+    <linearGradient id="royalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#daa520;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#dc143c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b4513;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Royal pattern with crowns and diamonds -->
+    <pattern id="royalPattern" x="0" y="0" width="35" height="35" patternUnits="userSpaceOnUse">
+      <!-- Crown -->
+      <path d="M17.5,8 L14,12 L16,12 L15,15 L17.5,13 L20,15 L19,12 L21,12 Z"
+            fill="#daa520" opacity="0.5"/>
+      <!-- Diamond -->
+      <path d="M17.5,20 L20,23 L17.5,26 L15,23 Z" fill="#dc143c" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Royal border -->
+  <rect x="8" y="8" width="579" height="826" fill="none" stroke="url(#royalGradient)" stroke-width="10" rx="30"/>
+
+  <!-- Royal pattern background -->
+  <rect x="15" y="15" width="565" height="812" fill="url(#royalPattern)" opacity="0.2" rx="25"/>
+
+  <!-- Crown corner decorations -->
+  <g opacity="0.8">
+    <!-- Top left crown -->
+    <path d="M25,20 L18,28 L22,28 L20,32 L25,29 L30,32 L28,28 L32,28 Z" fill="#daa520"/>
+    <!-- Top right crown -->
+    <path d="M570,20 L563,28 L567,28 L565,32 L570,29 L575,32 L573,28 L577,28 Z" fill="#daa520"/>
+    <!-- Bottom left crown -->
+    <path d="M25,822 L18,814 L22,814 L20,810 L25,813 L30,810 L28,814 L32,814 Z" fill="#daa520"/>
+    <!-- Bottom right crown -->
+    <path d="M570,822 L563,814 L567,814 L565,810 L570,813 L575,810 L573,814 L577,814 Z" fill="#daa520"/>
+  </g>
+
+  <!-- Diamond accents -->
+  <polygon points="30,30 35,25 40,30 35,35" fill="#dc143c" opacity="0.7"/>
+  <polygon points="560,30 565,25 570,30 565,35" fill="#dc143c" opacity="0.7"/>
+  <polygon points="30,812 35,817 40,812 35,807" fill="#dc143c" opacity="0.7"/>
+  <polygon points="560,812 565,817 570,812 565,807" fill="#dc143c" opacity="0.7"/>
+</svg>

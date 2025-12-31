@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FAQs from './FAQs';
 
 const HomePage = () => {
     return (
@@ -123,6 +124,8 @@ const HomePage = () => {
                     </Link>
                 </div>
             </section>
+
+            <FAQs />
         </div>
     );
 };

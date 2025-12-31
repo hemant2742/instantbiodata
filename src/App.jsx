@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HomePage from './components/HomePage';
 import TemplatesPage from './components/TemplatesPage';
 import BiodataForm from './components/BiodataForm';
+import Footer from './components/Footer';
 
 function App() {
     const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -44,6 +45,7 @@ function App() {
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>
+                <Footer />
             </div>
         </Router>
     );
